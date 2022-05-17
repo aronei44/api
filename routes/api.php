@@ -15,10 +15,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::post('/login', [LogController::class,'login']);
+Route::get('/reviews', [ReviewController::class,'index']);
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
     Route::post('/logout', [LogController::class,'logout']);
+
+    // review
+    Route::post('/review', [ReviewController::class,'store']);
+    Route::get('/review', [ReviewController::class,'show']);
 });

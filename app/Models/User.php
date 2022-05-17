@@ -22,4 +22,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(Photo::class);
     }
+    public function review()
+    {
+        return $this->hasOne(Review::class);
+    }
 }
