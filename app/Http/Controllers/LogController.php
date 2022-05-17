@@ -51,13 +51,13 @@ class LogController extends Controller
             'message' => 'User found',
             'user' => $user,
             'token' => $user->createToken('Megadigi')->plainTextToken,
-        ], 200);
+        ], 201);
     }
     public function logout(Request $request)
     {
         $request->user()->tokens()->delete();
         return response()->json([
             'message' => 'Logged out',
-        ], 200);
+        ], 401);
     }
 }
