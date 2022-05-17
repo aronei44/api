@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 Route::post('/login', [LogController::class,'login']);
 Route::get('/reviews', [ReviewController::class,'index']);
+Route::get('/umkms', [UmkmController::class,'index']);
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('/user', function (Request $request) {
@@ -26,4 +27,10 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     // review
     Route::post('/review', [ReviewController::class,'store']);
     Route::get('/review', [ReviewController::class,'show']);
+
+    // umkm
+    Route::post('/umkm', [UmkmController::class,'store']);
+    Route::get('/umkm', [UmkmController::class,'show']);
+    Route::put('/umkm/{id}', [UmkmController::class,'update']);
+    Route::delete('/umkm/{id}', [UmkmController::class,'destroy']);
 });
