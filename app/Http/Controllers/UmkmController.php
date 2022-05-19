@@ -110,6 +110,7 @@ class UmkmController extends Controller
                 'deskripsi' => $request->deskripsi,
                 'bidang_usaha' => $request->bidang_usaha,
                 'no_hp' => $request->no_hp,
+                'user_id' => $request->user_id ? $request->user_id : $request->user()->id
             ]);
             return response()->json([
                 'status' => 'success',

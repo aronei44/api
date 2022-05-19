@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Review;
 use Illuminate\Http\Request;
+use App\Http\Resources\ReviewResource;
 
 class ReviewController extends Controller
 {
@@ -14,14 +15,7 @@ class ReviewController extends Controller
      */
     public function index()
     {
-        $reviews = Review::with('user')->get();
-        foreach ($reviews as $review) {
-            $review->user->photo = $review->user->photos()->where('is_main', true)->first();
-        }
-        return response()->json([
-            'message' => 'Reviews found',
-            'reviews' => $reviews
-        ], 200);
+        return ReviewResource::collection(Review::all());
     }
 
     /**
@@ -39,20 +33,14 @@ class ReviewController extends Controller
         $user = $request->user();
         $review = Review::where('user_id', $user->id)->first();
         if ($review) {
-            return response()->json([
-                'message' => 'You have already reviewed',
-                'review' => $review,
-            ], 200);
+            return new ReviewResource($review);
         }
         $review = Review::create([
             'star' => $request->star,
             'comment' => $request->comment,
             'user_id' => $user->id,
         ]);
-        return response()->json([
-            'message' => 'Review created',
-            'review' => $review,
-        ], 201);
+        return new ReviewResource($review);
     }
 
     /**
@@ -70,10 +58,7 @@ class ReviewController extends Controller
                 'message' => 'You have not reviewed yet',
             ], 204);
         }
-        return response()->json([
-            'message' => 'Review found',
-            'review' => $review,
-        ], 200);
+        return new ReviewResource($review);
     }
 
 }
