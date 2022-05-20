@@ -20,9 +20,7 @@ Route::get('/umkms', [UmkmController::class,'index']);
 Route::get('/umkm/{id}', [UmkmController::class,'show']);
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
-    Route::get('/user', function (Request $request) {
-        return $request->user();
-    });
+    Route::get('/user', [LogController::class,'info']);
     Route::post('/logout', [LogController::class,'logout']);
 
     // review

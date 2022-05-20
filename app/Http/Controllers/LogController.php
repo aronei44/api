@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Photo;
 use Illuminate\Http\Request;
+use App\Http\Resources\UserResource;
 use Laravel\Socialite\Facades\Socialite;
 
 class LogController extends Controller
@@ -59,5 +60,9 @@ class LogController extends Controller
         return response()->json([
             'message' => 'Logged out',
         ], 401);
+    }
+    public function info(Request $request)
+    {
+        return (new UserResource(User::find($request->user()->id)))->response()->setStatusCode(200);
     }
 }
