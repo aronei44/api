@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Umkm;
 use App\Models\User;
 use App\Models\Photo;
 use Illuminate\Http\Request;
+use App\Http\Resources\UmkmResource;
 use App\Http\Resources\UserResource;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -63,6 +65,10 @@ class LogController extends Controller
     }
     public function info(Request $request)
     {
-        return (new UserResource(User::find($request->user()->id)))->response()->setStatusCode(200);
+        // return (new UserResource(User::find($request->user()->id)))->response()->setStatusCode(200);
+        return response()->json([
+            'user' => new UserResource(User::find($request->user()->id)),
+            'umkm' => $request->user()->umkm? new UmkmResource(Umkm::where('user_id', $request->user()->id)->first()) : null,
+        ], 200);
     }
 }
