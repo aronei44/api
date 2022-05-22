@@ -8,6 +8,7 @@ use App\Http\Requests\UmkmRequest;
 use App\Http\Resources\UmkmResource;
 use App\Http\Resources\DeletedResource;
 use App\Http\Resources\NotFoundResource;
+use App\Http\Resources\DuplicateResource;
 use App\Http\Resources\ServerErrorResource;
 use App\Http\Resources\UnauthorizedResource;
 

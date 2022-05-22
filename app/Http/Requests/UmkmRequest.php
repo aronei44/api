@@ -25,9 +25,11 @@ class UmkmRequest extends FormRequest
     {
         return [
             'nama' => 'required',
-            'rt' => 'required|numeric',
-            'rw' => 'required|numeric',
-            'kampung' => 'required',
+            'provinsi' => 'required',
+            'provinsi_id' => 'required|numeric',
+            'kabupaten' => 'required',
+            'kabupaten_id' => 'required|numeric',
+            'kecamatan' => 'required',
             'desa' => 'required',
             'alamat' => 'required',
             'deskripsi' => 'required',
