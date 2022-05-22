@@ -17,10 +17,14 @@ class UmkmResource extends JsonResource
     {
         return [
             'nama' => $this->nama,
-            'rt' => $this->rt,
-            'rw' => $this->rw,
-            'kampung' => $this->kampung,
+            'provinsi' => $this->provinsi,
+            'provinsi_id' => $this->provinsi_id,
+            'kabupaten' => $this->kabupaten,
+            'kabupaten_id' => $this->kabupaten_id,
+            'kecamatan' => $this->kecamatan,
+            'kecamatan_id' => $this->kecamatan_id,
             'desa' => $this->desa,
+            'desa_id' => $this->desa_id,
             'alamat' => $this->alamat,
             'deskripsi' => $this->deskripsi,
             'bidang_usaha' => $this->bidang_usaha,

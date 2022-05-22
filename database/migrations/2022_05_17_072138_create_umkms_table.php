@@ -16,10 +16,14 @@ class CreateUmkmsTable extends Migration
         Schema::create('umkms', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->integer('rt');
-            $table->integer('rw');
-            $table->string('kampung');
+            $table->string('provinsi');
+            $table->integer('provinsi_id');
+            $table->string('kabupaten');
+            $table->integer('kabupaten_id');
+            $table->string('kecamatan');
+            $table->integer('kecamatan_id');
             $table->string('desa');
+            $table->integer('desa_id');
             $table->text('alamat');
             $table->text('deskripsi');
             $table->text('bidang_usaha');
