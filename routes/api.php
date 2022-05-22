@@ -18,6 +18,9 @@ Route::post('/login', [LogController::class,'login']);
 Route::get('/reviews', [ReviewController::class,'index']);
 Route::get('/umkms', [UmkmController::class,'index']);
 Route::get('/umkm/{id}', [UmkmController::class,'show']);
+Route::get('/province',[RajaOngkirController::class,'get_province']);
+Route::get('/city/{id}',[RajaOngkirController::class,'get_city']);
+
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('/user', [LogController::class,'info']);
