@@ -21,9 +21,9 @@ class CreateUmkmsTable extends Migration
             $table->string('kabupaten');
             $table->integer('kabupaten_id');
             $table->string('kecamatan');
-            $table->integer('kecamatan_id');
+            $table->integer('kecamatan_id')->nullable();
             $table->string('desa');
-            $table->integer('desa_id');
+            $table->integer('desa_id')->nullable();
             $table->text('alamat');
             $table->text('deskripsi');
             $table->text('bidang_usaha');
