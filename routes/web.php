@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +18,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/auth', [LogController::class,'redirectToGoogle']);
 Route::get('/auth/redirect', [LogController::class,'handleGoogleCallback']);
+// Route::get('test', function() {
+//     Storage::disk('google')->put('testis.txt', 'Hello World');
+// });
