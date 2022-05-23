@@ -14,6 +14,11 @@ class PhotoResource extends JsonResource
      */
     public function toArray($request)
     {
-        return $this->url;
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'url' => $this->url,
+            'is_main' => $this->is_main
+        ];
     }
 }

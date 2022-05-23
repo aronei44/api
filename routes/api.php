@@ -35,4 +35,10 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('/umkm', [UmkmController::class,'show']);
     Route::put('/umkm/{id}', [UmkmController::class,'update']);
     Route::delete('/umkm/{id}', [UmkmController::class,'destroy']);
+
+    // user photo
+    Route::post('/user/photo', [UserPhotoController::class,'store']);
+    Route::post('/user/photo/bulk', [UserPhotoController::class,'bulkStore']);
+    Route::put('/user/photo/{photo}', [UserPhotoController::class,'update']);
+    Route::delete('/user/photo/{photo}', [UserPhotoController::class,'destroy']);
 });

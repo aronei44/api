@@ -19,7 +19,7 @@ class UserResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'email' => $this->email ? $this->email : null,
-            'photo' => new PhotoResource(Photo::where('user_id', $this->id)->where('is_main',true)->first()),
+            'photo' => PhotoResource::collection(Photo::where('user_id', $this->id)->get()),
             'created_at' => $this->created_at->diffForHumans(),
         ];
     }
