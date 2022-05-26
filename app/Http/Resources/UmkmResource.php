@@ -30,6 +30,7 @@ class UmkmResource extends JsonResource
             'bidang_usaha' => $this->bidang_usaha,
             'no_hp' => $this->no_hp,
             'user' => new UserResource(User::find($this->user_id)),
+            
         ];
     }
 }

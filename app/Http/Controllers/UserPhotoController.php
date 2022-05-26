@@ -18,7 +18,7 @@ class UserPhotoController extends Controller
             'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg,heic',
         ]);
         try {
-            $photo = $request->photo->store('','google');
+            $image = $request->photo->store('','google');
             $url = Storage::disk('google')->url($image);
             $photo = Photo::create([
                 'name' => $request->name,
@@ -41,7 +41,7 @@ class UserPhotoController extends Controller
             $photos = [];
             foreach($request->photos as $photo) {
                 try {
-                    $url = $photo->store('','google');
+                    $image = $photo->store('','google');
                     $url = Storage::disk('google')->url($image);
                     $photo = Photo::create([
                         'name' => $request->name,

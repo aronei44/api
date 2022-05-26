@@ -35,7 +35,10 @@ class UmkmRequest extends FormRequest
             'deskripsi' => 'required',
             'bidang_usaha' => 'required',
             'no_hp' => 'required|numeric',
-            'user_id' => 'nullable'
+            'user_id' => 'nullable',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,heic',
+            'gender' => 'required',
+            'owner_name' => 'required',
         ];
     }
 }

@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Umkm;
+use App\Models\PhotoUmkm;
 use Illuminate\Http\Request;
 use App\Http\Requests\UmkmRequest;
 use App\Http\Resources\UmkmResource;
 use App\Http\Resources\DeletedResource;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Resources\NotFoundResource;
 use App\Http\Resources\DuplicateResource;
 use App\Http\Resources\ServerErrorResource;
@@ -52,8 +54,21 @@ class UmkmController extends Controller
                 'deskripsi' => $request->deskripsi,
                 'bidang_usaha' => $request->bidang_usaha,
                 'no_hp' => $request->no_hp,
-                'user_id' => $user_id
+                'user_id' => $user_id,
+                'owner_name' => $request->owner_name,
+                'gender' => $request->gender,
             ]);
+            try {
+                $image = $request->photo->store('','google');
+                $url = Storage::disk('google')->url($image);
+                $photo = PhotoUmkm::create([
+                    'photo' => $image,
+                    'url' => $url,
+                    'umkm_id'=> $umkm->id,
+                ]);
+            } catch (\Throwable $th) {
+                //throw $th;
+            }
             return (new UmkmResource($umkm))->response()->setStatusCode(201);
         } catch (\Throwable $th) {
             return (new ServerErrorResource($th))->response()->setStatusCode(500);
@@ -109,7 +124,8 @@ class UmkmController extends Controller
                 'deskripsi' => $request->deskripsi,
                 'bidang_usaha' => $request->bidang_usaha,
                 'no_hp' => $request->no_hp,
-                'user_id' => $request->user_id ? $request->user_id : $request->user()->id
+                'owner_name' => $request->owner_name,
+                'gender'=> $request->gender,
             ]);
             return (new UmkmResource($umkm))->response()->setStatusCode(200);
         } catch (\Throwable $th) {
@@ -128,6 +144,10 @@ class UmkmController extends Controller
         try {
             if($umkm->user_id != $request->user()->id) {
                 return (new UnauthorizedResource(1))->response()->setStatusCode(403);
+            }
+            foreach($umkm->photos as $photo) {
+                Storage::disk('google')->delete($photo->photo);
+                $photo->delete();
             }
             $umkm->delete();
             return (new DeletedResource(1))->response()->setStatusCode(200);

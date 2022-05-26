@@ -5,16 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Umkm extends Model
+class PhotoUmkm extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
-    public function user()
+    public function umkm()
     {
-        return $this->belongsTo(User::class);
-    }
-    public function photos()
-    {
-        return $this->hasMany(PhotoUmkm::class);
+        return $this->belongsTo(Umkm::class);
     }
 }
